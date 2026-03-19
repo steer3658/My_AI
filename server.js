@@ -19,6 +19,8 @@ const sessions = new Map();
 
 app.post("/chat", async (req, res) => {
   try {
+    console.log("📩 요청 들어옴:", req.body);
+    
     const userMessage = req.body.message;
     const sessionId = req.body.sessionId || "default-session";
 
@@ -33,6 +35,8 @@ app.post("/chat", async (req, res) => {
     });
 
     sessions.set(sessionId, response.id);
+
+    console.log("📤 응답:", response.output_text);
 
     res.json({
       reply: response.output_text
